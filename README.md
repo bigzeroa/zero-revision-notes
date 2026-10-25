@@ -1,5 +1,7 @@
 # ZERO Revision Notes
 
+[![Check free tool](https://github.com/bigzeroa/zero-revision-notes/actions/workflows/check.yml/badge.svg)](https://github.com/bigzeroa/zero-revision-notes/actions/workflows/check.yml)
+
 A small, free tool for editors and clients to turn scattered video feedback into one clear review sheet.
 
 **[Use the live tool](https://zero-revision-notes.syrupyyew3.chatgpt.site/)**
