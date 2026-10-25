@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Free Video Revision Note Builder | ZERO</title>
+  <meta name="description" content="Turn scattered video feedback into one clear review sheet. Add clip IDs, versions, timestamps and exact changes. Copy or download for free, with no signup.">
+  <meta name="theme-color" content="#5440a4">
+  <meta property="og:title" content="Clear feedback. Better next cuts.">
+  <meta property="og:description" content="A free video revision-note builder for editors and their clients. No signup or video upload.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#builder">Skip to note builder</a>
+  <header class="masthead wrap">
+    <a class="brand" href="./" aria-label="ZERO Revision Notes home"><span class="brand-mark" aria-hidden="true">Z</span> ZERO <span class="brand-sub">/ Revision Notes</span></a>
+    <a href="#guide">How to give useful feedback</a>
+  </header>
+  <main>
+    <section class="intro wrap">
+      <div><h1>Clear feedback.<br>Better next cuts.</h1><p>Put every video revision in one place. Give your editor a clip, a timestamp, and a change they can act on.</p></div>
+      <aside class="intro-aside"><span class="play" aria-hidden="true">▷</span><p>Free to use.<br>No signup. No video upload.</p><a href="feedback-guide.md" download>Download the feedback guide</a></aside>
+    </section>
+    <section class="workspace wrap" id="builder" aria-label="Video revision note builder">
+      <div class="editor">
+        <div class="section-title"><h2>Build your review</h2><button type="button" class="text-button" id="example">Try an example</button></div>
+        <div class="project-fields">
+          <label>Project or batch<input id="project" maxlength="100" placeholder="e.g. November social clips" autocomplete="off"></label>
+          <label>Final approver <span class="optional">(optional)</span><input id="approver" maxlength="100" placeholder="Who combines the team's decisions?" autocomplete="off"></label>
+        </div>
+        <div id="notes"></div>
+        <button class="add-button" id="add" type="button"><span aria-hidden="true">+</span> Add another note</button>
+        <button id="undo" class="text-button" type="button" hidden>Undo removed note</button>
+        <p class="local-note">Your notes stay in this page. Download a copy before closing or refreshing it.</p>
+      </div>
+      <aside class="output" aria-label="Your review sheet">
+        <div class="section-title"><h2>Your review sheet</h2><span id="count" class="count">0 notes</span></div>
+        <div class="sheet"><div class="sheet-heading"><span>Video review</span><span aria-hidden="true">↗</span></div><pre id="preview" aria-label="Generated review sheet">Add your first note to see the review sheet here.</pre></div>
+        <div class="export-actions"><button id="copy" class="primary" type="button">Copy review sheet</button><button id="download" class="secondary" type="button">Download .txt</button></div>
+        <p id="status" role="status" aria-live="polite">Only complete notes are included in your export.</p>
+        <textarea id="copy-fallback" aria-label="Review sheet to copy manually" readonly hidden></textarea>
+      </aside>
+    </section>
+    <section class="wrap" style="padding-top:30px"><details><summary style="cursor:pointer;min-height:44px;color:#5440a4">Watch a 45-second walkthrough</summary><video controls preload="none" aria-label="How to use ZERO Revision Notes" style="width:100%;max-height:620px;margin-top:18px" src="https://zero-revision-notes.syrupyyew3.chatgpt.site/zero-revision-notes-tutorial.mp4"><track kind="captions" src="tutorial-captions.vtt" srclang="en" label="English" default></video><p>Walkthrough: name the clip and version, add a timecode and a specific requested change, then copy or download the sheet. The cafe example is fictional. Narration uses a computer-generated voice.</p></details></section>
+    <section id="guide" class="guide wrap">
+      <div class="guide-intro"><h2>Less guessing.<br>More useful notes.</h2><p>Use this with your usual review link, shared document, or email. The builder organizes the words; your video stays wherever it already lives.</p></div>
+      <div class="guide-body">
+        <article><h3>Name the exact version</h3><p>“C02, v03” gives the editor a reliable reference. Timecodes from an older cut may no longer line up.</p></article>
+        <article><h3>Describe the change</h3><p>Instead of “make it punchier,” try “00:03: cut the greeting and start with the product close-up.” Add the intended result when it helps.</p></article>
+        <article><h3>Send one set of decisions</h3><p>Choose one final approver. Resolve conflicting team requests before sending the review sheet. Label open questions clearly.</p></article>
+      </div>
+    </section>
+    <section class="kit wrap"><div><h2>Want the whole review workflow?</h2><p>The Shortform Review Kit includes a batch brief, review register, delivery checklist, and a filled example. Paid checkout is not available yet. Start with the free client feedback guide.</p></div><a class="secondary" href="feedback-guide.md" download>Get the free guide</a></section>
+    <section class="privacy wrap"><h2>About your notes</h2><p>The builder runs in your browser. It doesn’t send your project names, approver names, or feedback to ZERO, and it doesn’t save a draft across refreshes. Copy and download only when you’re ready. The hosting service may process ordinary website access logs.</p><noscript><p>This builder needs JavaScript. The <a href="feedback-guide.md">free feedback guide</a> works without it.</p></noscript></section>
+  </main>
+  <footer class="wrap"><span>Made by Project ZERO</span><span>A small tool for a clearer creative process.</span></footer>
+  <template id="note-template"><article class="note"><div class="note-top"><h3>Note <span class="note-number"></span></h3><button class="remove text-button" type="button">Remove</button></div><div class="note-meta"><label>Clip ID<input data-field="clip" maxlength="60" placeholder="C01" required autocomplete="off"></label><label>Version<input data-field="version" maxlength="40" placeholder="v01" required autocomplete="off"></label><label>Timecode<input data-field="time" maxlength="20" placeholder="00:08" inputmode="text" autocomplete="off" aria-describedby="time-help"></label></div><p class="field-hint" id="time-help">Use mm:ss or hh:mm:ss. Leave blank for the whole clip.</p><label>Requested change<textarea data-field="change" rows="3" maxlength="2000" placeholder="What should change, and what should the result be?" required></textarea></label><label class="priority-label">Type of note<select data-field="priority"><option value="Required change">Required change</option><option value="Preference">Preference</option><option value="Question">Question</option></select></label><p class="note-error" role="status"></p></article></template>
+</body></html>
